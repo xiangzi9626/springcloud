@@ -1,0 +1,2 @@
+前端执行npm run install 然后npm run dev启动项目
+后端mysql8.0.12  nacos  redis seata

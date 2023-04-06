@@ -1,0 +1,37 @@
+spring:
+  main:
+    # 允许循环依赖，避免启动时"com.alibaba.cloud.seata.rest.SeataRestTemplateAutoConfiguration"循环依赖报错
+    allow-circular-references: true
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    url: jdbc:mysql://localhost:3306/cloud_goods_category?serverTimezone=Asia/Shanghai&useOldAliasMetadataBehavior=true&useSSL=false
+    password: root
+    initialSize: 5
+  application:
+    name: goodscategory
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      #discovery:
+        #ephemeral: false # 设置为非临时实例
+seata:
+  service:
+    vgroup-mapping:
+      seata-demo: default
+  config:
+    type: file
+  registry:
+    type: nacos
+    nacos:
+      application: seata-server
+      username: nacos
+      password: nacos
+      group: SEATA_GROUP
+      server-addr: 127.0.0.1:8848
+      namespace: ""
+      cluster: default
+  tx-service-group: seata-demo
+  data-source-proxy-mode: AT
